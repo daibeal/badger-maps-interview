@@ -59,6 +59,19 @@ def get_earliest_check_in_customer(data: pd.DataFrame) -> pd.DataFrame:
   ans = data.loc[data['Last Check-In Date'] == earliest]
   return(ans)
 
+def get_latest_check_in_customer(data: pd.DataFrame) -> pd.DataFrame:
+  """
+   Returns the customer with the earliest check in date
+   :param pd.Dataframe data: dataset
+   :type data: pd.DataFrame
+   :return: Dataframe with customer name
+   :rtype: pd.DataFrame
+  """
+  data['Last Check-In Date'] = pd.to_datetime(data['Last Check-In Date'], infer_datetime_format= True, errors='coerce')
+  latest = max(data['Last Check-In Date'])
+  ans = data.loc[data['Last Check-In Date'] == latest]
+  return(ans)
+
 
 def main():
     # Load file
@@ -78,6 +91,8 @@ def main():
     # Check required items
     check_required_items(data)
     print(get_earliest_check_in_customer(data))
+    print(get_latest_check_in_customer(data))
+    
         
 if(__name__ == "__main__"):
     main()
