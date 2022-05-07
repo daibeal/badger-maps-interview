@@ -10,12 +10,10 @@ __email__ = "contact@andresbenites.es"
 __status__ = "Production"
 
 # Load libraries
-
 import numpy as np
 import pandas as pd
 import logging
 import warnings
-
 
 # Load file
 def load_file(file_path : str) -> pd.DataFrame:
@@ -27,7 +25,6 @@ def load_file(file_path : str) -> pd.DataFrame:
 
 # Set required fields
 required_items = ['Street', 'Zip', 'City', 'Last Check-In Date', 'Company']
-
 def check_required_items(data):
     # Check nulls in all required fields
     for required_item in required_items:
@@ -46,7 +43,7 @@ def get_nan_index(data :pd.DataFrame, col_name : str):
   except:
     return(-1)
 
-def get_earliest_check_in_customer(data: pd.DataFrame) -> pd.DataFrame:
+def get_earliest_check_in_date(data: pd.DataFrame) -> pd.DataFrame:
   """
    Returns the customer with the latest check in date
    :param pd.Dataframe data: dataset
@@ -59,7 +56,7 @@ def get_earliest_check_in_customer(data: pd.DataFrame) -> pd.DataFrame:
   ans = data.loc[data['Last Check-In Date'] == earliest]
   return(ans)
 
-def get_latest_check_in_customer(data: pd.DataFrame) -> pd.DataFrame:
+def get_latest_check_in_date(data: pd.DataFrame) -> pd.DataFrame:
   """
    Returns the customer with the earliest check in date
    :param pd.Dataframe data: dataset
@@ -115,9 +112,7 @@ def get_alphabetic_jobs(data: pd.DataFrame) -> pd.DataFrame:
   jobs = jobs.dropna()
   return(jobs)
 
-
 def main():
-    # Load file
     try:
         import tkinter as tk
         from tkinter import filedialog, messagebox
@@ -131,13 +126,30 @@ def main():
         logging.info("Launching alternative ...")
         file_path = input("Please enter the file path: ")
         data = load_file(file_path)
-    # Check required items
-    check_required_items(data)
-    print(get_earliest_check_in_customer(data))
-    print(get_latest_check_in_customer(data))
-    print(get_alphabetic_customer_names(data))
-    print(get_alphabetic_jobs(data))
 
-        
+    
+
+    # check_required_items(data)
+    ans=True
+    while ans:
+        print ("""
+        1. Get customer names in Alphabetic (A-Z) Order
+        2. Get customer jobs in Alphabetic (A-Z) Order
+        3. Get customer with the earliest check in date
+        4. Get customer with the latest check in date
+        """)
+        ans=input("What would you like to do? ")        
+        if ans=="1": 
+            print(get_alphabetic_customer_names(data))
+        elif ans=="2":
+            print(get_alphabetic_jobs(data))
+        elif ans=="3":
+            print(get_earliest_check_in_date(data))
+        elif ans=="4":
+            print(get_latest_check_in_date(data))
+        elif ans !="":
+            print("\n Not Valid Choice Try again") 
+
+
 if(__name__ == "__main__"):
     main()
