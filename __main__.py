@@ -24,7 +24,20 @@ def load_file(file_path : str) -> pd.DataFrame:
         return(data)
     except:
         logging.exception("Error loading file...")
-        
+
+# Set required fields
+required_items = ['Street', 'Zip', 'City', 'Last Check-In Date', 'Company']
+
+def check_required_items(data):
+    # Check nulls in all required fields
+    for required_item in required_items:
+        null_count = data[required_item].isnull().sum()
+        if(null_count > 1):
+            logging.warning(f"Found {null_count} null values in {required_item}")
+        elif(null_count == 1):
+            logging.warning(f"Found {null_count} null value in {required_item}")
+        else:
+            print(f'No null values found in {required_item}')
 
 def main():
     # Load file
@@ -41,6 +54,8 @@ def main():
         logging.info("Launching alternative ...")
         file_path = input("Please enter the file path: ")
         data = load_file(file_path)
+    # Check required items
+    check_required_items(data)
         
 if(__name__ == "__main__"):
     main()
