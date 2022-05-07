@@ -50,7 +50,7 @@
 
 <!-- ABOUT THE PROJECT -->
 
-## Our project
+## My project
 
 [![Product Name Screen Shot][product-screenshot]](https://github.com/daibeal/entrega-tsr)
 
@@ -87,4 +87,4 @@ Project Link: [https://github.com/daibeal/badger-maps-interviewr](https://github
 [license-url]: https://github.com/daibeal/cpa-entregable/blob/master/LICENSE.txt
 [linkedin-shield]: https://img.shields.io/badge/-LinkedIn-black.svg?style=for-the-badge&logo=linkedin&colorB=555
 [linkedin-url]: https://www.linkedin.com/in/daibeal/
-[product-screenshot]: https://nordicapis.com/wp-content/uploads/cloud-database.jpg
+[product-screenshot]:https://images.unsplash.com/photo-1488590528505-98d2b5aba04b?ixlib=rb-1.2.1&ixid=MnwxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8&auto=format&fit=crop&w=1170&q=80
