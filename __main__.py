@@ -16,8 +16,31 @@ import pandas as pd
 import logging
 import warnings
 
+
+# Load file
+def load_file(file_path : str) -> pd.DataFrame:
+    try:
+        data = pd.read_csv(file_path)
+        return(data)
+    except:
+        logging.exception("Error loading file...")
+        
+
 def main():
     # Load file
-    
+    try:
+        import tkinter as tk
+        from tkinter import filedialog, messagebox
+        root = tk.Tk()
+        root.withdraw()
+        messagebox.showinfo("Information","Please select the file to be processed")
+        file_path = filedialog.askopenfilename(filetypes=[("CSV files","*.csv")])
+        data = load_file(file_path)
+    except:
+        logging.error("Error loading file throught GUI...")
+        logging.info("Launching alternative ...")
+        file_path = input("Please enter the file path: ")
+        data = load_file(file_path)
+        
 if(__name__ == "__main__"):
     main()
