@@ -38,6 +38,13 @@ def check_required_items(data):
             logging.warning(f"Found {null_count} null value in {required_item}")
         else:
             print(f'No null values found in {required_item}')
+            
+def get_nan_index(data :pd.DataFrame, col_name : str):
+  try:
+    res = data.loc[pd.isna(data[col_name]), :].index
+    return(res)
+  except:
+    return(-1)
 
 def main():
     # Load file
