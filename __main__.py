@@ -46,7 +46,7 @@ def get_nan_index(data :pd.DataFrame, col_name : str):
   except:
     return(-1)
 
-def get_earliest_check_in_date(data: pd.DataFrame) -> pd.DataFrame:
+def get_earliest_check_in_customer(data: pd.DataFrame) -> pd.DataFrame:
   """
    Returns the customer with the latest check in date
    :param pd.Dataframe data: dataset
@@ -77,7 +77,7 @@ def main():
         data = load_file(file_path)
     # Check required items
     check_required_items(data)
-    print(get_earliest_check_in_date(data))
+    print(get_earliest_check_in_customer(data))
         
 if(__name__ == "__main__"):
     main()
