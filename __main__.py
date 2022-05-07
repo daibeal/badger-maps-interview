@@ -98,6 +98,23 @@ def get_alphabetic_customer_names(data: pd.DataFrame) -> pd.DataFrame:
   data = data.sort_values('Full Name', ascending=True)
   return(pd.DataFrame(data['Full Name']))
 
+def get_alphabetic_jobs(data: pd.DataFrame) -> pd.DataFrame:
+  """
+   Returns a list of the companies user’s jobs ordered alphabetically (A - Z)
+   :param pd.Dataframe data: dataset
+   :type data: pd.DataFrame
+   :return: Dataframe with customer names
+   :rtype: pd.DataFrame
+   :raises Error: if the entry dataset has not got the correct headers
+  """
+  
+  if(data['Job'].isnull().sum() != 0):
+    logging.warning(f"Found null values in column Job at { get_nan_index(data, 'Job')}")
+  data = data.sort_values('Job', ascending=True)
+  jobs = pd.DataFrame(data['Job'], columns = ["Job"])
+  jobs = jobs.dropna()
+  return(jobs)
+
 
 def main():
     # Load file
@@ -119,6 +136,7 @@ def main():
     print(get_earliest_check_in_customer(data))
     print(get_latest_check_in_customer(data))
     print(get_alphabetic_customer_names(data))
+    print(get_alphabetic_jobs(data))
 
         
 if(__name__ == "__main__"):
