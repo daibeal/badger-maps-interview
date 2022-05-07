@@ -72,6 +72,32 @@ def get_latest_check_in_customer(data: pd.DataFrame) -> pd.DataFrame:
   ans = data.loc[data['Last Check-In Date'] == latest]
   return(ans)
 
+def get_alphabetic_customer_names(data: pd.DataFrame) -> pd.DataFrame:
+  """
+   Get customer names in Alphabetic (A-Z) Order
+   :param pd.Dataframe data: dataset
+   :type data: pd.DataFrame
+   :return: Dataframe with customer names
+   :rtype: pd.DataFrame
+   :raises Error: if the entry dataset has not got the correct headers
+  """
+ 
+  warnings.filterwarnings("ignore")
+
+  if(data['First Name'].isnull().sum() != 0):
+    logging.warning(f"Found null values in column First Name at { get_nan_index(data, 'First Name')}")
+   
+  if(data['Last Name'].isnull().sum() != 0):
+    logging.warning(f"Found null values in column Last Name at {get_nan_index(data, 'Last Name')}")
+    
+  data = data.dropna(how='all')
+  data['First Name'].fillna(' ', inplace = True)
+  data['Last Name'].fillna(' ', inplace = True)
+  data['Full Name'] = data[['First Name', 'Last Name']].agg(' '.join, axis=1)
+  data['Full Name'] = data['Full Name'].str.strip()
+  data = data.sort_values('Full Name', ascending=True)
+  return(pd.DataFrame(data['Full Name']))
+
 
 def main():
     # Load file
@@ -92,7 +118,8 @@ def main():
     check_required_items(data)
     print(get_earliest_check_in_customer(data))
     print(get_latest_check_in_customer(data))
-    
+    print(get_alphabetic_customer_names(data))
+
         
 if(__name__ == "__main__"):
     main()
