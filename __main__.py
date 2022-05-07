@@ -129,7 +129,7 @@ def main():
 
     
 
-    check_required_items(data)
+    check_required_items(data)
     ans=True
     while ans:
         print ("""
